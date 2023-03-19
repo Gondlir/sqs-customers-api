@@ -23,8 +23,8 @@ namespace Sqs.Customers.WebApi.Controllers
         {
             try
             {
-                var result = _customerService.InsertCustomer(dto);
-                return Ok(result);
+                var response = _customerService.InsertCustomer(dto);
+                return Ok(new { response.CustomerId, response.Name, response.GitHubUserName });
             }
             catch (Exception ex)
             {

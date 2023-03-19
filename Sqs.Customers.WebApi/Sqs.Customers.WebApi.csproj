@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sqs.Customers.Application\Sqs.Customers.Application.csproj" />
     <ProjectReference Include="..\Sqs.Customers.Data.Persistence\Sqs.Customers.Data.Persistence.csproj" />
+    <ProjectReference Include="..\Sqs.Customers.Domain.CommandHandlers\Sqs.Customers.Domain.CommandHandlers.csproj" />
     <ProjectReference Include="..\Sqs.Infrastructure.EventBus\Sqs.Infrastructure.EventBus.csproj" />
   </ItemGroup>
 

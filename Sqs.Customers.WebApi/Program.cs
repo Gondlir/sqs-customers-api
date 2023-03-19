@@ -4,15 +4,18 @@ using Sqs.Customers.Application.CustomersServices.Impl;
 using Sqs.Customers.Data.Migrations.Context;
 using Sqs.Customers.Data.Persistence.Repositories;
 using Sqs.Customers.Data.Persistence.UoW;
+using Sqs.Customers.Domain.Abstractions.Commands;
 using Sqs.Customers.Domain.Abstractions.Interfaces;
+using Sqs.Customers.Domain.CommandHandlers.CustomerCommandHandlers;
 using Sqs.Customers.Domain.Entities.Customers;
+using Sqs.Customers.Domain.Entities.Customers.Commands;
 using Sqs.Infrastructure.EventBus;
 using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 InitializeBuilders(builder.Services);
 AddDbContexts(builder.Services);
-InitializeDependecies(builder.Services);
+InitializeInjectionOfDependecies(builder.Services);
 AddCors(builder.Services);
 //Authentication(builder.Services);
 
@@ -33,15 +36,15 @@ void InitializeBuilders(IServiceCollection services)
 //{
 //    //todo
 //}
-void InitializeDependecies(IServiceCollection services)
+void InitializeInjectionOfDependecies(IServiceCollection services)
 {
     services.AddTransient<ICustomerRepository, CustomerRepository>();
     services.AddTransient<ICustomersServices, CustomersService>();
     services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+    //services.AddScoped<ICommand, CreateCustomerCommand>(); // the ideal is create a ioc
+    services.AddScoped<ICommandHandler<CreateCustomerCommand>, CreateCustomerCommandHandler>();
     services.AddScoped<IUoW, UnitOfWork>();
     services.AddScoped<IEventBus, EventBus>();
-
-    //DependencyResolver.RegisterServices(services);
 }
 void AddDbContexts(IServiceCollection services)
 {
