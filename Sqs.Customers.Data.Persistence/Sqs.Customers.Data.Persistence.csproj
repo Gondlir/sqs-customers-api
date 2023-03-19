@@ -10,4 +10,9 @@
     <ProjectReference Include="..\Sqs.Customers.Domain\Sqs.Customers.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CommomBase\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
