@@ -4,6 +4,6 @@ namespace Sqs.Infrastructure.MessagingQueue.Abstractions
 {
     public interface IMessagingQueueService : IDisposable
     {
-        Task<T> SendMessageAsync<T>(ICommand message) where T : class;
+        Task<T> SendMessageAsync<T>(object message) where T : class;
     }
 }

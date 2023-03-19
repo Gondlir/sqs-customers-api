@@ -1,4 +1,5 @@
 ﻿using Amazon.SQS.Model;
+using Sqs.Customers.Application.MessagingServices;
 using Sqs.Customers.Domain.Abstractions.Interfaces;
 using Sqs.Customers.Domain.Entities.Customers;
 using Sqs.Customers.Domain.Entities.Customers.Commands;
@@ -39,11 +40,11 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
             var response = command.Response;
             if(response.Success) 
             {
-                _messageQueueService.SendMessageAsync<SendMessageRequest>(command).Wait();
+                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
             }
             return response;
         }
-
+        // implementar nos outros
         public (Guid CustomerId, string Name, string GitHubUserName) UpdateCustomer(UpdateCustomerDTO dto)
         {
             var command = new UpdateCustomerCommand

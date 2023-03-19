@@ -1,4 +1,5 @@
-﻿using Amazon.SQS;
+﻿using Amazon;
+using Amazon.SQS;
 using Amazon.SQS.Model;
 using Microsoft.Extensions.Options;
 using Sqs.Customers.Domain.Abstractions.Commands;
@@ -10,6 +11,7 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
     public sealed class SqsMessenger : IMessagingQueueService
     {
         private readonly IAmazonSQS _awsSQS;
+        private static AmazonSQSClient _awsClient = new AmazonSQSClient(RegionEndpoint.USEast1);
         private readonly IOptions<QueueSettings> _settings;
         private string? _queueUrl;
         public SqsMessenger(IAmazonSQS awsSQS, IOptions<QueueSettings> settings)
@@ -18,7 +20,7 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
             _settings = settings;
         }
 
-        public async Task<T> SendMessageAsync<T>(ICommand message) where T : class
+        public async Task<T> SendMessageAsync<T>(object message) where T : class
         {
             var queueUrl = await GetQueueUrlAsync();
             var sendMessage = new SendMessageRequest
@@ -35,7 +37,8 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
                     }
                 }
             };
-            var result = await _awsSQS.SendMessageAsync(sendMessage) as T;
+            //var result = await _awsSQS.SendMessageAsync(sendMessage) as T;
+            var result = await _awsClient.SendMessageAsync(sendMessage) as T;
             return result;
             //add cancelation token perhaps?
         }
@@ -46,7 +49,8 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
             {
                 return _queueUrl;
             }
-            var queueUrlResponse = await _awsSQS.GetQueueUrlAsync(_settings.Value.Name);
+            //var queueUrlResponse = await _awsSQS.GetQueueUrlAsync(_settings.Value.Name);
+            var queueUrlResponse = await _awsClient.GetQueueUrlAsync(_settings.Value.Name);
             _queueUrl = queueUrlResponse.QueueUrl;
             return _queueUrl;
         }
