@@ -1,7 +1,10 @@
+using Amazon.SQS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Sqs.Customers.Application.CustomersServices;
 using Sqs.Customers.Application.CustomersServices.Impl;
+using Sqs.Customers.Application.MessagingServices;
+using Sqs.Customers.Application.MessagingServices.Impl;
 using Sqs.Customers.Data.Migrations.Context;
 using Sqs.Customers.Data.Persistence.Repositories;
 using Sqs.Customers.Data.Persistence.UoW;
@@ -11,12 +14,13 @@ using Sqs.Customers.Domain.CommandHandlers.CustomerCommandHandlers;
 using Sqs.Customers.Domain.Entities.Customers;
 using Sqs.Customers.Domain.Entities.Customers.Commands;
 using Sqs.Infrastructure.EventBus;
+using Sqs.Infrastructure.MessagingQueue.Abstractions;
 using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 InitializeBuilders(builder.Services);
 AddDbContexts(builder.Services);
-InitializeInjectionOfDependecies(builder.Services);
+InitializeInjectionOfDependecies(builder.Services, builder);
 AddCors(builder.Services);
 //Authentication(builder.Services);
 
@@ -37,17 +41,24 @@ void InitializeBuilders(IServiceCollection services)
 //{
 //    //todo
 //}
-void InitializeInjectionOfDependecies(IServiceCollection services)
+void InitializeInjectionOfDependecies(IServiceCollection services, WebApplicationBuilder builder)
 {
     services.AddTransient<ICustomerRepository, CustomerRepository>();
     services.AddTransient<ICustomersServices, CustomersService>();
     services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
     //services.AddScoped<ICommand, CreateCustomerCommand>(); // the ideal is create a ioc
     services.AddScoped<ICommandHandler<CreateCustomerCommand>, CreateCustomerCommandHandler>();
     services.AddScoped<ICommandHandler<UpdateCustomerCommand>, UpdateCustomerCommandHandler>();
     services.AddScoped<ICommandHandler<DeleteCustomerCommand>, DeleteCustomerCommandHandler>();
     services.AddScoped<IUoW, UnitOfWork>();
     services.AddScoped<IEventBus, EventBus>();
+
+    services.AddSingleton<IAmazonSQS, AmazonSQSClient>();
+    services.AddSingleton<IMessagingQueueService, SqsMessenger>();
+
+
+    builder.Services.Configure<QueueSettings>(builder.Configuration.GetSection(QueueSettings.Key));
     services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });

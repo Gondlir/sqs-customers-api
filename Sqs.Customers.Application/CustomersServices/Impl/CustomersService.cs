@@ -1,7 +1,9 @@
-﻿using Sqs.Customers.Domain.Abstractions.Interfaces;
+﻿using Amazon.SQS.Model;
+using Sqs.Customers.Domain.Abstractions.Interfaces;
 using Sqs.Customers.Domain.Entities.Customers;
 using Sqs.Customers.Domain.Entities.Customers.Commands;
 using Sqs.Infrastructure.DTO;
+using Sqs.Infrastructure.MessagingQueue.Abstractions;
 
 namespace Sqs.Customers.Application.CustomersServices.Impl
 {
@@ -9,11 +11,14 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
     {
         private readonly IEventBus _bus;
         private readonly ICustomerRepository _customerRepository;
-
-        public CustomersService(IEventBus bus, ICustomerRepository customerRepo)
+        private readonly IMessagingQueueService _messageQueueService;
+        public CustomersService(IEventBus bus, 
+            ICustomerRepository customerRepository, 
+            IMessagingQueueService messageQueueService)
         {
             _bus = bus;
-            _customerRepository = customerRepo; 
+            _customerRepository = customerRepository;
+            _messageQueueService = messageQueueService;
         }
 
         public void DeleteCustomer(Guid customerId)
@@ -22,7 +27,7 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
             _bus.SendCommand(command);
         }
 
-        public (Guid CustomerId, string Name, string GitHubUserName) InsertCustomer(CreateCustomerDTO dto)
+        public (bool Success, Guid CustomerId, string Name, string GitHubUserName) InsertCustomer(CreateCustomerDTO dto)
         {
             var command = new CreateCustomerCommand
                 (
@@ -31,7 +36,12 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
                 dto.GitHubUsername
                 );
             _bus.SendCommand(command);
-            return command.Response;
+            var response = command.Response;
+            if(response.Success) 
+            {
+                _messageQueueService.SendMessageAsync<SendMessageRequest>(command).Wait();
+            }
+            return response;
         }
 
         public (Guid CustomerId, string Name, string GitHubUserName) UpdateCustomer(UpdateCustomerDTO dto)

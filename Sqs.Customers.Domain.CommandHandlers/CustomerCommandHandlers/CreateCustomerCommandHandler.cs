@@ -29,7 +29,7 @@ namespace Sqs.Customers.Domain.CommandHandlers.CustomerCommandHandlers
                  @event.GitHubUsername);
                     _customerRepository.Insert(customer);
                     _uow.Commit();
-                    @event.Response = (CustomerId: customer.Id, Name: customer.Name, GitHubUserName: customer.GitHubUsername);
+                    @event.Response = (Success: true, CustomerId: customer.Id, Name: customer.Name, GitHubUserName: customer.GitHubUsername);
                     scope.Complete();
                 }
                 catch (Exception ex)

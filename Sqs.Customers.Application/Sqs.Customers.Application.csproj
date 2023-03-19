@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.100.94" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Sqs.Customers.Domain\Sqs.Customers.Domain.csproj" />
     <ProjectReference Include="..\Sqs.Infrastructure.DTO\Sqs.Infrastructure.DTO.csproj" />
+    <ProjectReference Include="..\Sqs.Infrastructure.MessagingQueue\Sqs.Infrastructure.MessagingQueue.csproj" />
   </ItemGroup>
 
 </Project>

@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Customers.Data.Persiste
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Customers.Data.Migrations", "Sqs.Customers.Data.Migrations\Sqs.Customers.Data.Migrations.csproj", "{B85A44EA-E05F-49E4-920F-B1B531C8466B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2 - Messagings", "3.2 - Messagings", "{CFF3A7F8-68E5-41DD-8D75-F7C428CE2022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Infrastructure.MessagingQueue", "Sqs.Infrastructure.MessagingQueue\Sqs.Infrastructure.MessagingQueue.csproj", "{F2372DC9-2995-420F-84D5-800C2A44BEBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,10 @@ Global
 		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2372DC9-2995-420F-84D5-800C2A44BEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2372DC9-2995-420F-84D5-800C2A44BEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2372DC9-2995-420F-84D5-800C2A44BEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2372DC9-2995-420F-84D5-800C2A44BEBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,8 @@ Global
 		{C11F3536-6C90-445D-928B-4C935EDD4C5E} = {3BACB657-5827-4751-B9C8-F5E6E1D34090}
 		{6E224C85-20C7-4996-BB1B-2BF85403832B} = {012FBE09-122E-4343-AFE0-28008C07BF0C}
 		{B85A44EA-E05F-49E4-920F-B1B531C8466B} = {012FBE09-122E-4343-AFE0-28008C07BF0C}
+		{CFF3A7F8-68E5-41DD-8D75-F7C428CE2022} = {B18A4490-3689-4EB1-8665-722F9A7A1E61}
+		{F2372DC9-2995-420F-84D5-800C2A44BEBC} = {CFF3A7F8-68E5-41DD-8D75-F7C428CE2022}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7050AFD7-9023-470B-99F6-D60EC407D222}
