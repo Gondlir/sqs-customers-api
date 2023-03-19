@@ -43,6 +43,8 @@ void InitializeInjectionOfDependecies(IServiceCollection services)
     services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
     //services.AddScoped<ICommand, CreateCustomerCommand>(); // the ideal is create a ioc
     services.AddScoped<ICommandHandler<CreateCustomerCommand>, CreateCustomerCommandHandler>();
+    services.AddScoped<ICommandHandler<UpdateCustomerCommand>, UpdateCustomerCommandHandler>();
+    services.AddScoped<ICommandHandler<DeleteCustomerCommand>, DeleteCustomerCommandHandler>();
     services.AddScoped<IUoW, UnitOfWork>();
     services.AddScoped<IEventBus, EventBus>();
 }

@@ -1,4 +1,5 @@
 ﻿
+using Sqs.Customers.Domain.Entities.Customers;
 using Sqs.Infrastructure.DTO;
 
 namespace Sqs.Customers.Application.CustomersServices
@@ -6,7 +7,8 @@ namespace Sqs.Customers.Application.CustomersServices
     public interface ICustomersServices
     {
         (Guid CustomerId, string Name, string GitHubUserName) InsertCustomer(CreateCustomerDTO dto);
+        (Guid CustomerId, string Name, string GitHubUserName) UpdateCustomer(UpdateCustomerDTO dto);
         void DeleteCustomer(Guid customerId);
-        void UpdateCustomer(Guid customerId);
+        Customer GetById(Guid id);
     }
 }
