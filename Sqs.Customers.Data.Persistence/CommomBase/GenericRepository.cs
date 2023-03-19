@@ -8,10 +8,10 @@ namespace Sqs.Customers.Data.Persistence.CommomBase
         protected EntityFrameworkContext _context;
         protected DbSet<T> dbSet;
 
-        protected GenericRepository(EntityFrameworkContext context, DbSet<T> dbSet)
+        protected GenericRepository(EntityFrameworkContext context)
         {
             this._context = context;
-            this.dbSet = dbSet;
+            this.dbSet = context.Set<T>();
         }
 
         protected IQueryable<T> Table 
