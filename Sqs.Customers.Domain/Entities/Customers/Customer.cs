@@ -2,6 +2,10 @@
 {
     public sealed class Customer
     {
+        protected Customer() 
+        {
+            // Needed by ORM
+        }
         public Customer( 
             string name, string email, string gitHubUsername)
         {

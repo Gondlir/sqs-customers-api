@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Infrastructure.DTO", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Customers.Data.Persistence", "Sqs.Customers.Data.Persistence\Sqs.Customers.Data.Persistence.csproj", "{6E224C85-20C7-4996-BB1B-2BF85403832B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Customers.Data.Migrations", "Sqs.Customers.Data.Migrations\Sqs.Customers.Data.Migrations.csproj", "{B85A44EA-E05F-49E4-920F-B1B531C8466B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{6E224C85-20C7-4996-BB1B-2BF85403832B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E224C85-20C7-4996-BB1B-2BF85403832B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E224C85-20C7-4996-BB1B-2BF85403832B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B85A44EA-E05F-49E4-920F-B1B531C8466B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{B88F7EB0-BF14-4D16-B559-07EF5210775E} = {3BACB657-5827-4751-B9C8-F5E6E1D34090}
 		{C11F3536-6C90-445D-928B-4C935EDD4C5E} = {3BACB657-5827-4751-B9C8-F5E6E1D34090}
 		{6E224C85-20C7-4996-BB1B-2BF85403832B} = {012FBE09-122E-4343-AFE0-28008C07BF0C}
+		{B85A44EA-E05F-49E4-920F-B1B531C8466B} = {012FBE09-122E-4343-AFE0-28008C07BF0C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7050AFD7-9023-470B-99F6-D60EC407D222}
