@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Sqs.Customers.Application.CustomersServices;
 using Sqs.Customers.Application.CustomersServices.Impl;
 using Sqs.Customers.Data.Migrations.Context;
@@ -47,6 +48,11 @@ void InitializeInjectionOfDependecies(IServiceCollection services)
     services.AddScoped<ICommandHandler<DeleteCustomerCommand>, DeleteCustomerCommandHandler>();
     services.AddScoped<IUoW, UnitOfWork>();
     services.AddScoped<IEventBus, EventBus>();
+    services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+
+    });
 }
 void AddDbContexts(IServiceCollection services)
 {
@@ -67,17 +73,15 @@ void ConfigureApp(IApplicationBuilder app)
     app.UseHttpsRedirection();
     app.UseRouting();
     app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-    //app.UseAuthentication();
-    //app.UseAuthorization();
     app.UseEndpoints(endpoints =>
     {
         endpoints.MapControllers();
     });
-    //app.UseSwagger();
-    //app.UseSwaggerUI(opt =>
-    //{
-    //    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer Swagger");
-    //});
+    app.UseSwagger();
+    app.UseSwaggerUI(opt =>
+    {
+        opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer Swagger Documentation");
+    });
     app.UseRouting();
     //app.UseMiddleware<ExceptionMiddleware>();
     app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
