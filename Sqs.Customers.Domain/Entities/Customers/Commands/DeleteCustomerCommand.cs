@@ -10,5 +10,6 @@ namespace Sqs.Customers.Domain.Entities.Customers.Commands
         }
 
         public Guid Id { get; init; }
+        public bool Success { get; set; }
     }
 }

@@ -38,8 +38,16 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
                 }
             };
             //var result = await _awsSQS.SendMessageAsync(sendMessage) as T;
-            var result = await _awsClient.SendMessageAsync(sendMessage) as T;
-            return result;
+            try
+            {
+                var result = await _awsClient.SendMessageAsync(sendMessage) as T;
+                return result!;
+            }
+            catch (Exception ex)
+            {
+                // Log Errors
+                throw;
+            }
             //add cancelation token perhaps?
         }
         #region Private Methods
@@ -60,7 +68,5 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
             _awsSQS.Dispose();
             this.Dispose();
         }
-
-       
     }
 }

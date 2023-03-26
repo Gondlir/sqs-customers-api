@@ -3,6 +3,7 @@ using Sqs.Customers.Domain.Abstractions.Interfaces;
 
 namespace Sqs.Infrastructure.EventBus
 {
+    // a class who acts like an MediatR
     public sealed class EventBus : IEventBus
     {
         private readonly IServiceProvider _serviceProvider;
@@ -15,13 +16,13 @@ namespace Sqs.Infrastructure.EventBus
         {
             if (_serviceProvider == null)
                 return;
-            var commandHandler = GetServices<ICommandHandler<T>>().FirstOrDefault();
+            var commandHandler = GetServices<ICommandHandler<T>>().FirstOrDefault()!;
             commandHandler.Handle(command);
         }
         #region Private Methods
         private IEnumerable<T> GetServices<T>() 
         {
-            return (IEnumerable<T>)_serviceProvider.GetService(typeof(IEnumerable<T>));
+            return (IEnumerable<T>)_serviceProvider.GetService(typeof(IEnumerable<T>))!;
         }
         #endregion
     }

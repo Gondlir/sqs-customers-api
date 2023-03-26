@@ -39,6 +39,7 @@ namespace Sqs.Customers.WebApi.Controllers
                     InnerException = ex.InnerException.Message,
                     StackTrace = ex.StackTrace
                 };
+                return BadRequest(error);
                 throw;
             }
         }

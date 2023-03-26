@@ -1,5 +1,6 @@
 ﻿using Amazon.SQS.Model;
 using Sqs.Customers.Application.MessagingServices;
+using Sqs.Customers.Domain.Abstractions.Commands;
 using Sqs.Customers.Domain.Abstractions.Interfaces;
 using Sqs.Customers.Domain.Entities.Customers;
 using Sqs.Customers.Domain.Entities.Customers.Commands;
@@ -26,6 +27,10 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
         {
             var command = new DeleteCustomerCommand(customerId);
             _bus.SendCommand(command);
+            if (command.Success)
+            {
+                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
+            }
         }
 
         public (bool Success, Guid CustomerId, string Name, string GitHubUserName) InsertCustomer(CreateCustomerDTO dto)
@@ -37,15 +42,15 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
                 dto.GitHubUsername
                 );
             _bus.SendCommand(command);
-            var response = command.Response;
-            if(response.Success) 
+            if (command.Response.Success) 
             {
-                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
+                // refact logic
+                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait(); // => Wais is bad practice ;
             }
-            return response;
+            return command.Response;
         }
         // implementar nos outros
-        public (Guid CustomerId, string Name, string GitHubUserName) UpdateCustomer(UpdateCustomerDTO dto)
+        public (bool Success, Guid CustomerId, string Name, string GitHubUserName) UpdateCustomer(UpdateCustomerDTO dto)
         {
             var command = new UpdateCustomerCommand
                 (
@@ -55,6 +60,10 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
                 dto.GitHubUsername
                 );
             _bus.SendCommand(command);
+            if (command.Response.Success)
+            {
+                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
+            }
             return command.Response;
         }
         public Customer GetById(Guid id) 

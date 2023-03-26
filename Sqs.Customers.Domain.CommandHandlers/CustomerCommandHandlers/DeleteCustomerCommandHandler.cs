@@ -29,6 +29,7 @@ namespace Sqs.Customers.Domain.CommandHandlers.CustomerCommandHandlers
 
                     _customerRepository.Delete(customer);
                     _uow.Commit();
+                    @event.Success = true;
                     scope.Complete();
                 }
                 catch (Exception ex)

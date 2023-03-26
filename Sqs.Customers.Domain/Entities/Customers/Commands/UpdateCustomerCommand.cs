@@ -14,6 +14,6 @@ namespace Sqs.Customers.Domain.Entities.Customers
         public string? Name { get; private init; }
         public string? Email { get; private init; }
         public string? GitHubUsername { get; private init; }
-        public (Guid CustomerId, string Name, string GitHubUserName) Response { get; set; }
+        public (bool Success, Guid CustomerId, string Name, string GitHubUserName) Response { get; set; }
     }
 }
