@@ -32,7 +32,7 @@ namespace Sqs.Customers.Application.MessagingServices.Impl
                         "MessageType", new MessageAttributeValue
                         {
                             DataType = "String",
-                            StringValue = typeof(T).Name
+                            StringValue = message.ToString()
                         }
                     }
                 }

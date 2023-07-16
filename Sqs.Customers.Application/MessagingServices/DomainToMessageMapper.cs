@@ -9,9 +9,9 @@ namespace Sqs.Customers.Application.MessagingServices
     {
      // create a contract  ??
      // mudar nome da classe talvez ?? 
-        public static CustomerResponseDTO ToCustomerResponse(this CreateCustomerCommand command) 
+        public static CustomerCreated ToCustomerResponse(this CreateCustomerCommand command) 
         {
-            return new CustomerResponseDTO
+            return new CustomerCreated
             {
                 Id = command.Response.CustomerId,
                 Name = command.Name,
@@ -19,9 +19,9 @@ namespace Sqs.Customers.Application.MessagingServices
                 GitHubUsername = command.GitHubUsername
             };
         }
-        public static CustomerResponseDTO ToCustomerResponse(this UpdateCustomerCommand command)
+        public static CustomerUpdated ToCustomerResponse(this UpdateCustomerCommand command)
         {
-            return new CustomerResponseDTO
+            return new CustomerUpdated
             {
                 Id = command.Response.CustomerId,
                 Name = command.Name,
@@ -29,9 +29,9 @@ namespace Sqs.Customers.Application.MessagingServices
                 GitHubUsername = command.GitHubUsername
             };
         }
-        public static CustomerResponseDTO ToCustomerResponse(this DeleteCustomerCommand command)
+        public static CustomerDeleted ToCustomerResponse(this DeleteCustomerCommand command)
         {
-            return new CustomerResponseDTO
+            return new CustomerDeleted
             {
                 Id = command.Id,
             };
