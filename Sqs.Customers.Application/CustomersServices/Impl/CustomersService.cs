@@ -1,4 +1,5 @@
-﻿using Amazon.SQS.Model;
+﻿
+using Amazon.SimpleNotificationService.Model;
 using Sqs.Customers.Application.MessagingServices;
 using Sqs.Customers.Domain.Abstractions.Commands;
 using Sqs.Customers.Domain.Abstractions.Interfaces;
@@ -29,7 +30,7 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
             _bus.SendCommand(command);
             if (command.Success)
             {
-                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
+                _messageQueueService.PublishMessageAsync<PublishRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
             }
         }
 
@@ -45,7 +46,7 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
             if (command.Response.Success) 
             {
                 // refact logic
-                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait(); // => Wais is bad practice ;
+                _messageQueueService.PublishMessageAsync<PublishRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait(); // => Wais is bad practice ;
             }
             return command.Response;
         }
@@ -62,7 +63,7 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
             _bus.SendCommand(command);
             if (command.Response.Success)
             {
-                _messageQueueService.SendMessageAsync<SendMessageRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
+                _messageQueueService.PublishMessageAsync<PublishRequest>(DomainToMessageMapper.ToCustomerResponse(command)).Wait();
             }
             return command.Response;
         }

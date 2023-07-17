@@ -2,7 +2,7 @@
 {
     public sealed class QueueSettings
     {
-        public const string Key = "Queue";
+        public const string Key = "Topic";
         public string Name { get; set; } //= "customers";
     }
 }

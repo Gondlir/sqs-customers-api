@@ -1,4 +1,4 @@
-using Amazon.SQS;
+using Amazon.SimpleNotificationService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Sqs.Customers.Application.CustomersServices;
@@ -54,8 +54,8 @@ void InitializeInjectionOfDependecies(IServiceCollection services, WebApplicatio
     services.AddScoped<IUoW, UnitOfWork>();
     services.AddScoped<IEventBus, EventBus>();
 
-    services.AddSingleton<IAmazonSQS, AmazonSQSClient>();
-    services.AddSingleton<IMessagingQueueService, SqsMessenger>();
+    services.AddSingleton<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>();
+    services.AddSingleton<IMessagingQueueService, SnsMessenger>();
 
 
     builder.Services.Configure<QueueSettings>(builder.Configuration.GetSection(QueueSettings.Key));
