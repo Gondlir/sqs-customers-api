@@ -1,4 +1,6 @@
-﻿namespace Sqs.Customers.Domain.Entities.Customers
+﻿using System.Text.Json.Serialization;
+
+namespace Sqs.Customers.Domain.Entities.Customers
 {
     public sealed class Customer
     {
@@ -15,6 +17,11 @@
             GitHubUsername = gitHubUsername;
         }
 
+        [JsonPropertyName("pk")]
+        public string Pk => Id.ToString();
+
+        [JsonPropertyName("sk")]
+        public string Sk => Id.ToString();
         public  Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

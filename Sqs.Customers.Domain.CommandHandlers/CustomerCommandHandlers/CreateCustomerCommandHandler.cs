@@ -27,8 +27,9 @@ namespace Sqs.Customers.Domain.CommandHandlers.CustomerCommandHandlers
                  (@event.Name,
                  @event.Email,
                  @event.GitHubUsername);
-                    _customerRepository.Insert(customer);
-                    _uow.Commit();
+                    //_customerRepository.Insert(customer);// EF
+                    _customerRepository.CreateWithDynamoDB(customer);// DynamoDB
+                    //_uow.Commit(); when is with dynamo dosent need it, only for ef 
                     @event.Response = (Success: true, CustomerId: customer.Id, Name: customer.Name, GitHubUserName: customer.GitHubUsername);
                     scope.Complete();
                 }

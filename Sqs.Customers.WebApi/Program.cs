@@ -1,3 +1,4 @@
+using Amazon.DynamoDBv2;
 using Amazon.SimpleNotificationService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -55,6 +56,7 @@ void InitializeInjectionOfDependecies(IServiceCollection services, WebApplicatio
     services.AddScoped<IEventBus, EventBus>();
 
     services.AddSingleton<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>();
+    services.AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>();
     services.AddSingleton<IMessagingQueueService, SnsMessenger>();
 
 
