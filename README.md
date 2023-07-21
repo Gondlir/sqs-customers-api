@@ -10,4 +10,9 @@
   * Orientação a Objetos
   * Design Patterns 
 
+Com esse projeto tive o prazer de aprender sobre os serviços da Amazon tais como:
+  * DynamoDB
+  * SQS
+  * 
+  * 
     
