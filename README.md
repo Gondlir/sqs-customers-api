@@ -1,5 +1,5 @@
 # sqs-customers-api
-<h1> API that aims the CRUD of a User with persistence in Amazon services like DynamoDB like NoSQL database and services like SQS queue publishing </h1>
+<h1> API that aims the CRUD of a User with persistence in Amazon services like DynamoDB database and services like SQS queue publishing </h1>
 
   <h3> The project was developed applying concepts such as:</h3>
   
