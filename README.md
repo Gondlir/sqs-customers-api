@@ -1,16 +1,15 @@
 # sqs-customers-api
-<h1> API que tem como objetivo o CRUD de um  de Usuário com persistência nos serviços da Amazon como DynamobDB como banco NOSQL 
-  e serviços como publicação em fila SQS </h1>
+<h1> API that aims the CRUD of a User with persistence in Amazon services like DynamoDB like NoSQL database and services like SQS queue publishing </h1>
 
-  <h3> O projeto foi desenvolvido aplicando conceitos como:</h3>
+  <h3> The project was developed applying concepts such as:</h3>
   
   * Domain Driven Design
   * CQRS
-  * Princípios SOLID
-  * Orientação a Objetos
+  * SOLID Principles
+  * POO
   * Design Patterns 
 
-# Com esse projeto tive o prazer de aprender sobre as tecnologias da Amazon tais como:
+# With this project I had the pleasure of learning about Amazon technologies such as:
   * Aws DynamoDB
   * Aws SQS
   * Aws SNS
@@ -18,16 +17,16 @@
   * AWS Secrets Manager
   * AWS Lambda
     
-# Também a utilizar essas tecnologias em cenários como: 
-* Aws SQS => Como criar uma fila, criar uma mensagem, criar um consumidor de mensagem, lidar com dead-letters e criar uma fila pra isso, redirecionar dead-letters
-* Aws SNS => Criar tópicos em SNS, criar um consumidor e publicador de mensagem, consumir a mensagem em multiplos apps
-* Aws DynamoDB =>  O que são Partition Key e Sort Key, criando tabelas no DynamoDB, implementando acesso ao DynamoDB, criar transações, streams e autoscaling
-* AWS S3 => Upload de arquivos usando C#, Download e processamento de arquivos usando o c#, implementações de retentativas
-* AWS Secrets Manager => Criando segredos, lendo segredos em c#, versões de segredos, lidando com rotação de segredos
-* AWS Lambda => O que é um serverless e lambda, criação lambda, conceitos de triggers e destinations, debugando lambdas localmente, consumindo filas SQS usando lambda, consumindo tópicos SNS usando lambda, triggering lambda com DynamoDB, triggering lambda com S3, convertendo uma API em uma AWS Lambda
+# Also using these technologies in scenarios such as:
+* Aws SQS => How to create a queue, create a message, create a message consumer, handle dead-letters and create a queue for it, redirect dead-letters
+* Aws SNS => Create topics in SNS, create message consumer and publisher, consume message in multiple apps
+* Aws DynamoDB => What are Partition Key and Sort Key, creating tables in DynamoDB, implementing access to DynamoDB, creating transactions, streams and autoscaling
+* AWS S3 => File upload using C#, File download and processing using C#, retry implementations
+* AWS Secrets Manager => Creating secrets, reading secrets in C#, versioning secrets, handling secret rotation
+* AWS Lambda => What is serverless and lambda, creating lambda, concepts of triggers and destinations, debugging lambdas locally, consuming SQS queues using lambda, consuming SNS topics using lambda, triggering lambda with DynamoDB, triggering lambda with S3, converting an API to an AWS Lambda
 
-Esse projeto tem em conjunto outros projetos que foram desenvolvidos, todos fazem parte do mesmo escopo. 
-São eles: 
+This project has together other projects that were developed, all of which are part of the same scope.
+Are they: 
  * https://github.com/Gondlir/sqs-publisher
  * https://github.com/Gondlir/sqs-consumer
  * https://github.com/Gondlir/sns-publisher
