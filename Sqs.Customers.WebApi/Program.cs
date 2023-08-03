@@ -53,7 +53,7 @@ void InitializeInjectionOfDependecies(IServiceCollection services, WebApplicatio
     services.AddScoped<ICommandHandler<UpdateCustomerCommand>, UpdateCustomerCommandHandler>();
     services.AddScoped<ICommandHandler<DeleteCustomerCommand>, DeleteCustomerCommandHandler>();
     services.AddScoped<IUoW, UnitOfWork>();
-    services.AddScoped<IEventBus, EventBus>();
+    services.AddScoped<IEventCommandBusSender, CommandBusSender>();
 
     services.AddSingleton<IAmazonSimpleNotificationService, AmazonSimpleNotificationServiceClient>();
     services.AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>();

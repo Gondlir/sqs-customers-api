@@ -3,11 +3,10 @@ using Sqs.Customers.Domain.Abstractions.Interfaces;
 
 namespace Sqs.Infrastructure.EventBus
 {
-    // a class who acts like an MediatR
-    public sealed class EventBus : IEventBus
+    public sealed class CommandBusSender : IEventCommandBusSender
     {
         private readonly IServiceProvider _serviceProvider;
-        public EventBus(IServiceProvider serviceProvider)
+        public CommandBusSender(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

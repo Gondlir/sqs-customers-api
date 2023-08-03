@@ -2,7 +2,7 @@
 
 namespace Sqs.Customers.Domain.Abstractions.Interfaces
 {  
-    public interface IEventBus
+    public interface IEventCommandBusSender
     {
         void SendCommand<T>(T command) where T : ICommand;
     }
