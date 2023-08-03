@@ -12,10 +12,10 @@ namespace Sqs.Customers.Application.CustomersServices.Impl
 {
     public sealed class CustomersService : ICustomersServices
     {
-        private readonly IEventBus _bus;
+        private readonly IEventCommandBusSender _bus;
         private readonly ICustomerRepository _customerRepository;
         private readonly IMessagingQueueService _messageQueueService;
-        public CustomersService(IEventBus bus, 
+        public CustomersService(IEventCommandBusSender bus, 
             ICustomerRepository customerRepository, 
             IMessagingQueueService messageQueueService)
         {
